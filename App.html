@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voter Data Management System V3</title>
+    <title>Voter Data Management System V4</title>
     <style>
         /* Base styles from original file (retained/cleaned up) */
         * {
@@ -250,7 +250,6 @@
             border-left: 4px solid #007acc;
         }
 
-        /* MODIFIED: Duplicate Warning Section */
         .warning-section { 
             background: linear-gradient(135deg, #fff3cd, #ffeaa7); 
             border: 2px solid #ffc107; 
@@ -318,8 +317,24 @@
             .no-print {
                 display: none !important;
             }
+            .print-table {
+                font-size: 14pt !important; /* Increased font size */
+                width: 100%;
+                border-collapse: collapse;
+            }
             .print-table thead {
                 display: table-header-group; /* Crucial for repeating header on every page */
+            }
+            .print-table tr {
+                page-break-inside: avoid;
+            }
+            .print-table th, .print-table td {
+                border: 1px solid #333 !important;
+                padding: 6px 8px;
+            }
+            .print-table th {
+                background-color: #e9ecef !important;
+                font-weight: bold;
             }
         }
         
@@ -426,16 +441,17 @@
         }
         
         .duplicate-group {
-            background: #fff9e6;
-            border: 1px solid #ffc107;
+            background: #fefefe;
+            border: 1px solid #ddd;
+            border-left: 5px solid #ffc107;
             border-radius: 5px;
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 10px 15px;
         }
         
         .duplicate-group-header {
             font-weight: bold;
-            color: #856404;
+            color: #555;
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
@@ -443,19 +459,12 @@
         }
         
         .duplicate-matching-fields {
-            background: #fff3cd;
+            background: #f8f9fa;
             padding: 8px;
             border-radius: 4px;
             margin-bottom: 10px;
             font-size: 0.9em;
-        }
-        
-        .duplicate-item {
-            background: white;
-            border: 1px solid #ffeaa7;
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 8px;
+            border-left: 3px solid #6c757d;
         }
         
         .voter-number-sorting {
@@ -508,12 +517,11 @@
             100% { opacity: 0; transform: translate(-50%, -20px); }
         }
 
-        /* UPDATED Floating Action Buttons */
         .floating-actions {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            display: flex; /* Always flex now */
+            display: flex;
             flex-direction: column;
             gap: 10px;
             z-index: 100;
@@ -522,7 +530,7 @@
             padding: 12px 20px;
             font-size: 14px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 220px; /* Wider for count */
+            width: 220px;
             justify-content: center;
         }
         .floating-actions button:disabled {
@@ -530,8 +538,13 @@
             cursor: not-allowed;
         }
 
-        #duplicateDetailsModal .modal-content, #duplicateListModal .modal-content {
-            max-width: 900px;
+        /* Styles for better duplicate analysis */
+        #duplicateDetailsModal .modal-content {
+            max-width: 95%;
+            width: 1200px;
+        }
+        #duplicateListModal .modal-content {
+             max-width: 900px;
         }
         #duplicateDetailsContent {
             margin-top: 15px;
@@ -542,6 +555,30 @@
         #duplicateListModal .warning-list {
             max-height: 60vh;
             overflow-y: auto;
+            padding: 5px;
+        }
+        .highlight-match td {
+            background-color: #fff3cd !important;
+            font-weight: bold;
+        }
+        .duplicate-category-section {
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fdfdfd;
+        }
+        .duplicate-category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        .duplicate-category-header h4 {
+            margin: 0;
+            color: #2c3e50;
         }
         
     </style>
@@ -555,7 +592,7 @@
             <div class="welcome-icon">
                 <i class="fas fa-users"></i>
             </div>
-            <h2>Voter Data Management System V3</h2>
+            <h2>Voter Data Management System V4</h2>
             <p>This is a read-only, self-contained application. Data is loaded instantly and works offline.</p>
             <button class="welcome-button" onclick="closeWelcomeMessage()">
                 Start Management <i class="fas fa-arrow-right"></i>
@@ -567,7 +604,6 @@
         <h1><i class="fas fa-users"></i> BD BEANIBAZAR SHOMITI Voter Data Management System 2025</h1>
         <h2> Powered By: Nahidur Rahman</h2>
         
-        <!-- Success Message (now fixed at top of screen) -->
         <div class="success-message" id="successMessage">
             <i class="fas fa-check-circle"></i> <span id="successText"></span>
         </div>
@@ -577,14 +613,13 @@
             <p id="dataLoadStatus">Initializing...</p>
         </div>
         
-        <!-- MODIFIED: Warning Section (Potential Duplicates Summary) -->
         <div class="warning-section" id="warningSection">
             <div id="duplicateSummary">
                 <!-- Content injected by JavaScript -->
             </div>
             <div class="buttons" style="justify-content: flex-start; margin-top: 10px;">
                 <button onclick="openDuplicateListModal(this)" class="btn-primary" id="viewDuplicatesBtn" style="display: none;">
-                    <i class="fas fa-list"></i> View Details
+                    <i class="fas fa-list"></i> View Duplicate Groups
                 </button>
             </div>
         </div>
@@ -652,7 +687,7 @@
                 <div class="multi-select-group"><label><i class="fas fa-flag"></i> States:</label><select multiple class="multi-select" id="multiState"></select></div>
             </div>
             <div class="buttons">
-                <button onclick="applyAdvancedFilters(this)" class="btn-success"><i class="fas fa-filter"></i> Apply Advanced</button>
+                <button onclick="applyFilters(this)" class="btn-success"><i class="fas fa-filter"></i> Apply Advanced</button>
                 <button onclick="clearAdvancedFilters(this)" class="btn-warning"><i class="fas fa-broom"></i> Clear Advanced</button>
             </div>
         </div>
@@ -678,7 +713,7 @@
             <button onclick="applyFilters(this)" class="btn-primary"><i class="fas fa-filter"></i> Apply Filters</button>
             <button onclick="toggleAdvancedFilters(this)" class="btn-info"><i class="fas fa-cogs"></i> Advanced Search</button>
             <button onclick="clearFilters(this)" class="btn-warning"><i class="fas fa-broom"></i> Clear All Filters</button>
-            <button onclick="checkDuplicates(this)" class="btn-info"><i class="fas fa-users-slash"></i> Check Duplicates</button>
+            <button onclick="checkDuplicates(this)" class="btn-danger"><i class="fas fa-users-slash"></i> Check Duplicates</button>
             <button onclick="checkMissingBooks(this)" class="btn-danger"><i class="fas fa-search"></i> Check Missing Books</button>
             <button onclick="analyzeBookGaps(this)" class="btn-info"><i class="fas fa-chart-bar"></i> Analyze Gaps</button>
             <button onclick="printAllFiltered(this)" class="btn-success"><i class="fas fa-print"></i> Print Filtered</button>
@@ -714,7 +749,6 @@
         <div id="printSection" class="print-area"></div>
     </div>
     
-    <!-- MODIFIED: Combined Floating Action Buttons -->
     <div class="floating-actions" id="floatingActions">
         <!-- For single selection -->
         <button onclick="triggerEditSelected(this)" class="btn-primary" id="floatingEditBtn" style="display: none;">
@@ -775,7 +809,6 @@
         </div>
     </div>
 
-    <!-- MODIFIED: Duplicate List Modal -->
     <div class="modal" id="duplicateListModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -786,8 +819,6 @@
                 <!-- Content generated by JS -->
             </div>
             <div class="form-actions">
-                <button onclick="printSelectedDuplicatesFromModal(this)" class="btn-primary"><i class="fas fa-print"></i> Print Selected</button>
-                <button onclick="printAllDuplicateRecords(this)" class="btn-success"><i class="fas fa-print"></i> Print All</button>
                 <button type="button" class="btn-warning" onclick="closeDuplicateListModal()">Close</button>
             </div>
         </div>
@@ -801,7 +832,7 @@
             </div>
             <div id="duplicateDetailsContent"></div>
             <div class="form-actions">
-                <button onclick="printDuplicateGroupDetails(this)" class="btn-info"><i class="fas fa-print"></i> Print Details</button>
+                <button onclick="printDuplicateGroupDetails(-1, this)" class="btn-info"><i class="fas fa-print"></i> Print Details</button>
                 <button type="button" class="btn-warning" onclick="closeDuplicateDetailsModal()">Close</button>
             </div>
         </div>
@@ -838,8 +869,7 @@
         }
 
         function loadVoterData() {
-             voterData = [
-                {
+             voterData = [  {
     "VOTER #": "B-L-1",
     "FIRST NAME": "A.",
     "LAST NAME": "AHMED (ZAKIR)",
@@ -136886,7 +136916,7 @@
     "VILLAGE": "NALBAHAR",
     "BK#": "282",
     "": ""
-  }];
+  } ];
             voterData.forEach((voter, index) => voter.id = index + 1);
         }
         
@@ -136909,10 +136939,10 @@
             }
         }
 
-        function addFeedback(buttonElement) {
-            if (buttonElement) {
-                buttonElement.classList.add('active');
-                setTimeout(() => buttonElement.classList.remove('active'), 300);
+        function addFeedback(button) {
+            if (button) {
+                button.classList.add('active');
+                setTimeout(() => button.classList.remove('active'), 300);
             }
         }
 
@@ -136982,6 +137012,9 @@
                 return true;
             });
             
+            duplicateGroups = [];
+            duplicateVoterIdMap.clear();
+            renderDuplicateSummary();
             sortTable(currentSortColumn, true);
         }
 
@@ -136991,12 +137024,6 @@
             clearAdvancedFilters();
             applyFilters();
             updateStatus('All filters cleared.');
-        }
-        
-        function applyAdvancedFilters(button) {
-            addFeedback(button);
-            applyFilters();
-            updateStatus('Advanced filters applied.');
         }
 
         function clearAdvancedFilters(button) {
@@ -137126,11 +137153,12 @@
 
         function checkDuplicates(button) {
             addFeedback(button);
+            const dataToCheck = filteredData;
             const CRITICAL_FIELDS = ['FIRST NAME', 'LAST NAME', 'YOB', 'VILLAGE'];
             const groups = {};
             duplicateVoterIdMap.clear();
 
-            voterData.forEach(voter => {
+            dataToCheck.forEach(voter => {
                 const key = CRITICAL_FIELDS.map(field => (voter[field] || '').trim().toLowerCase()).join('|');
                 if (CRITICAL_FIELDS.some(field => !(voter[field] || '').trim())) return; 
                 if (!groups[key]) groups[key] = [];
@@ -137140,6 +137168,7 @@
             duplicateGroups = Object.values(groups).filter(group => group.length > 1);
             duplicateGroups.forEach(group => group.forEach(voter => duplicateVoterIdMap.set(voter.id, group)));
             renderDuplicateSummary();
+            updateFloatingActions();
         }
 
         function renderDuplicateSummary() {
@@ -137150,86 +137179,115 @@
             document.getElementById('duplicateCount').textContent = totalGroups;
 
             if (totalGroups > 0) {
-                summaryDiv.innerHTML = `<h4><i class="fas fa-exclamation-triangle"></i> ${totalGroups} Potential Duplicate Voter Groups Found</h4>`;
+                summaryDiv.innerHTML = `<h4><i class="fas fa-exclamation-triangle"></i> ${totalGroups} Potential Duplicate Voter Groups Found (within current filters)</h4>`;
                 viewBtn.style.display = 'block';
                 section.style.display = 'block';
                 updateStatus(`Found ${totalGroups} potential duplicate groups.`);
             } else {
-                summaryDiv.innerHTML = `<h4><i class="fas fa-check-circle"></i> No critical duplicates found.</h4>`;
-                viewBtn.style.display = 'none';
-                section.style.display = 'block';
-                updateStatus(`No duplicates found based on Name, YOB, and Village.`);
+                if (section.style.display === 'block') {
+                    summaryDiv.innerHTML = `<h4><i class="fas fa-check-circle"></i> No critical duplicates found in the filtered results.</h4>`;
+                    viewBtn.style.display = 'none';
+                } else {
+                     section.style.display = 'none';
+                }
             }
         }
 
         function openDuplicateListModal(button) {
             addFeedback(button);
             const listContainer = document.getElementById('warningList');
-            let tableHtml = `<table class="print-table" style="width: 100%; font-size: 11px;">
-                <thead>
-                    <tr>
-                        <th class="no-print"><input type="checkbox" onchange="toggleAllDuplicatesSelection(this)"></th>
-                        <th>VOTER #</th>
-                        <th>FIRST NAME</th>
-                        <th>LAST NAME</th>
-                        <th>YOB</th>
-                        <th>VILLAGE</th>
-                        <th>Count</th>
-                    </tr>
-                </thead>
-                <tbody>`;
+            
+            const groupsOfTwo = duplicateGroups.filter(g => g.length === 2);
+            const groupsOfThree = duplicateGroups.filter(g => g.length === 3);
+            const groupsOfMore = duplicateGroups.filter(g => g.length > 3);
 
-            duplicateGroups.forEach((group) => {
-                const count = group.length;
-                group.forEach(voter => {
-                    tableHtml += `
-                        <tr>
-                            <td class="no-print"><input type="checkbox" class="duplicate-checkbox" value="${voter.id}"></td>
-                            <td>${voter['VOTER #']}</td>
-                            <td>${voter['FIRST NAME']}</td>
-                            <td>${voter['LAST NAME']}</td>
-                            <td>${voter['YOB']}</td>
-                            <td>${voter['VILLAGE']}</td>
-                            <td>${count}</td>
-                        </tr>`;
+            if (duplicateGroups.length === 0) {
+                listContainer.innerHTML = '<div class="status" style="text-align:center;">No duplicate groups found for the current filters.</div>';
+                document.getElementById('duplicateListModal').style.display = 'flex';
+                return;
+            }
+
+            const renderSection = (title, groups, categoryId) => {
+                if (groups.length === 0) return '';
+                let sectionHtml = `
+                    <div class="duplicate-category-section">
+                        <div class="duplicate-category-header">
+                            <h4>${title} (${groups.length} Groups)</h4>
+                            <button class="btn-success" onclick="printDuplicateCategory('${categoryId}', this)">
+                                <i class="fas fa-print"></i> Print This Section
+                            </button>
+                        </div>`;
+                
+                groups.forEach((group) => {
+                    const originalIndex = duplicateGroups.findIndex(g => g[0].id === group[0].id);
+                    const base = group[0];
+                    sectionHtml += `
+                        <div class="duplicate-group">
+                            <div class="duplicate-group-header">
+                                <span>Group: <strong>${base['FIRST NAME']} ${base['LAST NAME']}</strong> (${group.length} Records)</span>
+                                <button class="btn-info" style="padding: 5px 10px; font-size: 12px;" onclick="showDuplicateGroupDetails(${originalIndex})">
+                                    <i class="fas fa-search-plus"></i> Compare Details
+                                </button>
+                            </div>
+                            <div class="duplicate-matching-fields">
+                                <strong>Matching On:</strong> ${base['FIRST NAME']} | ${base['LAST NAME']} | ${base['YOB']} | ${base['VILLAGE']}
+                            </div>
+                        </div>`;
                 });
-                tableHtml += `<tr><td colspan="7" style="background-color: #ffc107; height: 3px; padding: 0; border: 0;"></td></tr>`;
-            });
-            tableHtml += `</tbody></table>`;
-            listContainer.innerHTML = tableHtml;
+                sectionHtml += '</div>';
+                return sectionHtml;
+            };
+
+            let contentHtml = renderSection('Groups with 2 Records', groupsOfTwo, 'two');
+            contentHtml += renderSection('Groups with 3 Records', groupsOfThree, 'three');
+            contentHtml += renderSection('Groups with more than 3 Records', groupsOfMore, 'more');
+            
+            listContainer.innerHTML = contentHtml;
             document.getElementById('duplicateListModal').style.display = 'flex';
         }
         
-        function toggleAllDuplicatesSelection(masterCheckbox) {
-            document.querySelectorAll('#warningList .duplicate-checkbox').forEach(cb => cb.checked = masterCheckbox.checked);
-        }
-
         function closeDuplicateListModal() {
             document.getElementById('duplicateListModal').style.display = 'none';
         }
 
+        function showDuplicateGroupDetails(groupIndex) {
+            const group = duplicateGroups[groupIndex];
+            if (!group) return;
+
+            const base = group[0];
+            document.getElementById('duplicateModalTitle').textContent = `Side-by-Side Comparison for: ${base['FIRST NAME']} ${base['LAST NAME']}`;
+            const fieldsToCompare = ['VOTER #', 'FIRST NAME', 'LAST NAME', 'YOB', 'VILLAGE', 'BK#', 'ADDRESS', 'CITY', 'ST', 'ZIP', 'PHONE', 'GEN.', 'UNION'];
+            const highlightedFields = ['FIRST NAME', 'LAST NAME', 'YOB', 'VILLAGE'];
+            let comparisonHtml = `<div class="table-container" style="max-height: 60vh;"><table class="print-table" style="width: 100%;"><thead><tr><th style="text-align: right; background-color: #f8f9fa; color: #333;">Field</th>`;
+            group.forEach((voter, i) => {
+                comparisonHtml += `<th>Voter ${i + 1} (${voter['VOTER #']})</th>`;
+            });
+            comparisonHtml += '</tr></thead><tbody>';
+            fieldsToCompare.forEach(field => {
+                const isHighlighted = highlightedFields.includes(field);
+                comparisonHtml += `<tr class="${isHighlighted ? 'highlight-match' : ''}"><td style="font-weight: bold; text-align: right;">${field}</td>`;
+                group.forEach(voter => {
+                    comparisonHtml += `<td>${voter[field] || '---'}</td>`;
+                });
+                comparisonHtml += '</tr>';
+            });
+            comparisonHtml += '</tbody></table></div>';
+            document.getElementById('duplicateDetailsContent').innerHTML = comparisonHtml;
+            document.querySelector('#duplicateDetailsModal .btn-info').setAttribute('onclick', `printDuplicateGroupDetails(${groupIndex}, this)`);
+            document.getElementById('duplicateDetailsModal').style.display = 'flex';
+        }
+        
         function openDuplicateDetailsModal(button) {
             addFeedback(button);
             if (selectedRecords.length !== 1) return;
             const group = duplicateVoterIdMap.get(selectedRecords[0]);
             if (!group) return;
-
-            const base = group[0];
-            document.getElementById('duplicateModalTitle').textContent = `Duplicate Details for ${base['FIRST NAME']} ${base['LAST NAME']}`;
-            let contentHtml = `
-                <p>This group is flagged because all voters have the same First Name, Last Name, Year of Birth, and Village.</p>
-                <div class="duplicate-matching-fields">
-                    <strong>Matching On:</strong> ${base['FIRST NAME']} ${base['LAST NAME']} | ${base['YOB']} | ${base['VILLAGE']}
-                </div>`;
-            contentHtml += group.map(voter => `
-                <div class="duplicate-item" style="${selectedRecords[0] === voter.id ? 'border-color: #007acc; border-width: 2px;' : ''}">
-                    <p><strong>Voter #: ${voter['VOTER #']}</strong> | <strong>Book: ${voter['BK#']}</strong></p>
-                    <p><strong>Address:</strong> ${voter['ADDRESS']}, ${voter['CITY']}, ${voter['ST']} ${voter['ZIP']}</p>
-                    <p><strong>Phone:</strong> ${voter['PHONE'] || 'N/A'}</p>
-                </div>
-            `).join('');
-            document.getElementById('duplicateDetailsContent').innerHTML = contentHtml;
-            document.getElementById('duplicateDetailsModal').style.display = 'flex';
+            const groupIndex = duplicateGroups.findIndex(g => g.some(v => v.id === selectedRecords[0]));
+            if (groupIndex > -1) {
+                showDuplicateGroupDetails(groupIndex);
+            } else {
+                updateStatus("This record is not part of a duplicate group in the current filtered view.");
+            }
         }
 
         function closeDuplicateDetailsModal() {
@@ -137238,79 +137296,97 @@
 
         // --- PRINTING ---
         
-        function setPrintOrientation(orientation) {
-            let style = document.getElementById('print-style');
-            if (!style) {
-                style = document.createElement('style');
-                style.id = 'print-style';
-                document.head.appendChild(style);
+        function generatePrintHTML(data) {
+            if (!data || data.length === 0) {
+                updateStatus("No data available to print.");
+                return;
             }
-            style.innerHTML = `@media print { @page { size: ${orientation}; margin: 0.5cm; } .print-table { font-size: 12pt !important; width: 100%; border-collapse: collapse; } .print-table th, .print-table td { border: 1px solid #ccc; padding: 5px; } .print-table th { background-color: #f2f2f2 !important; font-weight: bold; } .print-page-break { page-break-after: always; } .print-header { text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 10px; } }`;
-        }
-
-        function generatePrintHTML(data, title) {
-            if (!data || data.length === 0) return `<div class="print-header">${title} (0 records)</div><p>No data to display.</p>`;
-            let html = `<div class="print-header">${title} (${data.length} records)</div>`;
-            const recordsPerPage = 25;
+            
             const headers = `<thead><tr><th>VOTER #</th><th>FIRST NAME</th><th>LAST NAME</th><th>YOB</th><th>GEN.</th><th>ADDRESS</th><th>CITY</th><th>ST</th><th>PHONE</th><th>VILLAGE</th><th>BK#</th></tr></thead>`;
-            html += `<table class="print-table">${headers}<tbody>`;
-            data.forEach((voter, index) => {
-                if (index > 0 && index % recordsPerPage === 0) {
-                    html += `</tbody></table><div class="print-page-break"></div><table class="print-table">${headers}<tbody>`;
-                }
-                html += `<tr><td>${voter['VOTER #']||''}</td><td>${voter['FIRST NAME']||''}</td><td>${voter['LAST NAME']||''}</td><td>${voter['YOB']||''}</td><td>${voter['GEN.']||''}</td><td>${voter['ADDRESS']||''}</td><td>${voter['CITY']||''}</td><td>${voter['ST']||''}</td><td>${voter['PHONE']||''}</td><td>${voter['VILLAGE']||''}</td><td>${voter['BK#']||''}</td></tr>`;
+            let tableRows = '';
+            data.forEach((voter) => {
+                tableRows += `<tr><td>${voter['VOTER #']||''}</td><td>${voter['FIRST NAME']||''}</td><td>${voter['LAST NAME']||''}</td><td>${voter['YOB']||''}</td><td>${voter['GEN.']||''}</td><td>${voter['ADDRESS']||''}</td><td>${voter['CITY']||''}</td><td>${voter['ST']||''}</td><td>${voter['PHONE']||''}</td><td>${voter['VILLAGE']||''}</td><td>${voter['BK#']||''}</td></tr>`;
             });
-            html += '</tbody></table>';
-            document.getElementById('printSection').innerHTML = html;
+            
+            // Added style block to suggest landscape orientation
+            let html = `
+                <style> @media print { @page { size: landscape; } } </style>
+                <table class="print-table">${headers}<tbody>${tableRows}</tbody></table>`;
+            
+            const printSection = document.getElementById('printSection');
+            printSection.innerHTML = html;
             window.print();
-            setTimeout(() => { document.getElementById('printSection').innerHTML = ''; }, 500);
+            setTimeout(() => { printSection.innerHTML = ''; }, 1000); 
         }
 
         function printSelected(button) {
             addFeedback(button);
             if (selectedRecords.length === 0) return updateStatus('Please select records to print.');
             const dataToPrint = voterData.filter(v => selectedRecords.includes(v.id));
-            setPrintOrientation('landscape');
-            generatePrintHTML(dataToPrint, 'Selected Voter Records');
+            generatePrintHTML(dataToPrint);
         }
 
         function printAllFiltered(button) {
             addFeedback(button);
             if (filteredData.length === 0) return updateStatus('No filtered records to print.');
-            setPrintOrientation('landscape');
-            generatePrintHTML(filteredData, 'Filtered Voter Records');
+            generatePrintHTML(filteredData);
         }
 
         function printVoterCard(voter) {
             if (!voter) return;
-            setPrintOrientation('portrait');
-            const cardHTML = `<div style="border:2px solid #000;padding:20px;margin:20px auto;max-width:400px;font-family:Arial,sans-serif"><h2 style="text-align:center;border-bottom:1px solid #ccc;padding-bottom:10px">Voter Card</h2><p><strong>Voter #:</strong> ${voter['VOTER #']}</p><p><strong>Name:</strong> ${voter['FIRST NAME']} ${voter['LAST NAME']}</p><p><strong>YOB:</strong> ${voter['YOB']}</p><p><strong>Village:</strong> ${voter['VILLAGE']}</p><p><strong>Book #:</strong> ${voter['BK#']}</p></div>`;
-            document.getElementById('printSection').innerHTML = cardHTML;
+            const cardHTML = `
+                <style> @media print { @page { size: portrait; } } </style>
+                <div style="border:2px solid #000;padding:20px;margin:20px auto;max-width:400px;font-family:Arial,sans-serif;font-size:14pt;page-break-inside:avoid;"><h2 style="text-align:center;border-bottom:1px solid #ccc;padding-bottom:10px">Voter Card</h2><p><strong>Voter #:</strong> ${voter['VOTER #']}</p><p><strong>Name:</strong> ${voter['FIRST NAME']} ${voter['LAST NAME']}</p><p><strong>YOB:</strong> ${voter['YOB']}</p><p><strong>Village:</strong> ${voter['VILLAGE']}</p><p><strong>Book #:</strong> ${voter['BK#']}</p></div>`;
+            const printSection = document.getElementById('printSection');
+            printSection.innerHTML = cardHTML;
             window.print();
+            setTimeout(() => { printSection.innerHTML = ''; }, 1000);
+        }
+
+        function printDuplicateCategory(categoryId, button) {
+            if (button) addFeedback(button);
+            let groupsToPrint;
+
+            if (categoryId === 'two') {
+                groupsToPrint = duplicateGroups.filter(g => g.length === 2);
+            } else if (categoryId === 'three') {
+                groupsToPrint = duplicateGroups.filter(g => g.length === 3);
+            } else if (categoryId === 'more') {
+                groupsToPrint = duplicateGroups.filter(g => g.length > 3);
+            } else { return; }
+
+            if (groupsToPrint.length === 0) {
+                updateStatus(`No groups to print for category: ${categoryId}`);
+                return;
+            }
+            const votersToPrint = groupsToPrint.flat();
+            generatePrintHTML(votersToPrint);
         }
         
-        function printSelectedDuplicatesFromModal(button) {
-            addFeedback(button);
-            const selectedIds = Array.from(document.querySelectorAll('#warningList .duplicate-checkbox:checked')).map(cb => parseInt(cb.value));
-            if (selectedIds.length === 0) return updateStatus('Please select at least one duplicate record to print.');
-            const dataToPrint = voterData.filter(voter => selectedIds.includes(voter.id));
-            setPrintOrientation('landscape');
-            generatePrintHTML(dataToPrint, 'Selected Duplicate Voter Records');
-        }
+        function printDuplicateGroupDetails(groupIndex, button){
+            if (button) addFeedback(button);
+            if (groupIndex < 0) {
+                updateStatus("Cannot print. Please open a group's details to print.");
+                return;
+            }
+            
+            const contentToPrint = document.getElementById('duplicateDetailsContent').innerHTML;
+            if (!contentToPrint) return;
+            
+            const printHTML = `
+                <style> 
+                    @media print { 
+                        @page { size: landscape; } 
+                        .print-comparison-table .print-table { font-size: 10pt !important; } /* smaller font for comparison */
+                    } 
+                </style>
+                <div class="print-comparison-table">${contentToPrint}</div>
+            `;
 
-        function printAllDuplicateRecords(button) {
-            addFeedback(button);
-            const allDuplicateVoters = duplicateGroups.flat();
-            if (allDuplicateVoters.length === 0) return updateStatus('No duplicate records to print.');
-            setPrintOrientation('landscape');
-            generatePrintHTML(allDuplicateVoters, 'All Potential Duplicate Voter Records');
-        }
-
-        function printDuplicateGroupDetails(button){
-            addFeedback(button);
-            setPrintOrientation('portrait');
-            document.getElementById('printSection').innerHTML = document.getElementById('duplicateDetailsContent').innerHTML;
+            const printSection = document.getElementById('printSection');
+            printSection.innerHTML = printHTML; 
             window.print();
+            setTimeout(() => { printSection.innerHTML = ''; }, 1000);
         }
 
         // --- ADD/EDIT VOTER ---
@@ -137389,4 +137465,5 @@
     </script>
 </body>
 </html>
+
 
