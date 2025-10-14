@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voter Data Management System V4</title>
+    <title>BD BEANIBAZAR SHOMITI Voter Data Management System 2025</title>
     <style>
-        /* Base styles from original file (retained/cleaned up) */
+        /* Base styles */
         * {
             margin: 0;
             padding: 0;
@@ -31,90 +31,18 @@
         
         h1 {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             color: #2c3e50;
             font-size: 2.2em;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
-        .welcome-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
-        }
-        
-        .welcome-content {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
+        h2 {
             text-align: center;
-            max-width: 600px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        .welcome-content h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-        
-        .welcome-content p {
-            color: #495057;
-            font-size: 1.2em;
-            line-height: 1.6;
             margin-bottom: 25px;
-        }
-        
-        .welcome-icon {
-            font-size: 4em;
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-        
-        .welcome-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 25px 0;
-        }
-        
-        .welcome-feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-align: left;
-        }
-        
-        .welcome-feature i {
-            color: #28a745;
+            color: #5d6d7e;
             font-size: 1.2em;
-        }
-        
-        .welcome-button {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease; /* Optimized transition */
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .welcome-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            font-weight: normal;
         }
         
         .filters {
@@ -144,7 +72,7 @@
             border: 2px solid #dee2e6;
             border-radius: 6px;
             font-size: 13px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Optimized transition */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         input:focus {
@@ -168,7 +96,7 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 13px;
-            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease; /* Optimized transition */
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -266,7 +194,20 @@
         }
         #duplicateSummary h4 { color: #856404; margin: 0; display: flex; align-items: center; gap: 10px; }
         
-        .stats { display: flex; justify-content: space-around; margin: 15px 0; flex-wrap: wrap; gap: 10px; }
+        .stats { 
+            display: flex; 
+            justify-content: space-around; 
+            margin: 15px 0; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
         .stat-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px; border-radius: 8px; text-align: center; min-width: 150px; }
         .stat-number { font-size: 1.8em; font-weight: bold; display: block; }
         .stat-label { font-size: 0.9em; opacity: 0.9; }
@@ -318,12 +259,12 @@
                 display: none !important;
             }
             .print-table {
-                font-size: 14pt !important; /* Increased font size */
+                font-size: 14pt !important;
                 width: 100%;
                 border-collapse: collapse;
             }
             .print-table thead {
-                display: table-header-group; /* Crucial for repeating header on every page */
+                display: table-header-group;
             }
             .print-table tr {
                 page-break-inside: avoid;
@@ -351,22 +292,7 @@
         }
 
         .initial-load-section {
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border: 3px solid #1976d2;
-            text-align: center;
-        }
-        .initial-load-section h3 {
-             color: #1976d2;
-             margin-bottom: 15px;
-             font-size: 1.3em;
-        }
-        .initial-load-section p {
-            color: #495057;
-            font-size: 1em;
-            margin-bottom: 10px;
+            display: none;
         }
         
         /* Modal Styles */
@@ -581,25 +507,379 @@
             color: #2c3e50;
         }
         
+        /* NEW STYLES FOR ENHANCEMENTS */
+        
+        .center-management-section {
+            background: linear-gradient(135deg, #fff0f6, #ffdeeb);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 3px solid #e64980;
+        }
+        
+        .center-management-section h3 {
+            color: #e64980;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .centers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .center-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border: 2px solid #e64980;
+        }
+        
+        .center-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            color: #e64980;
+        }
+        
+        .center-cities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .city-tag {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .city-tag button {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            padding: 0;
+            font-size: 14px;
+        }
+        
+        .card-message-section {
+            background: linear-gradient(135deg, #e6f9ff, #ccf2ff);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #17a2b8;
+        }
+        
+        .card-message-section h4 {
+            color: #17a2b8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .card-message-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .selection-mode-toggle {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: #28a745;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .enhanced-print-options {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #ff9800;
+        }
+        
+        .enhanced-print-options h4 {
+            color: #ff9800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .print-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .duplicate-options-modal .modal-content {
+            max-width: 700px;
+        }
+        
+        .duplicate-field-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .duplicate-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .duplicate-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .cross-location-options {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .cross-location-options h5 {
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        
+        /* Enhanced UX elements */
+        .smooth-transition {
+            transition: all 0.3s ease;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, auto);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .voter-card {
+            border: 2px solid #000;
+            border-radius: 10px;
+            padding: 15px;
+            background: white;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            font-family: Arial, sans-serif;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .voter-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .voter-card p {
+            font-size: 14px;
+            margin: 3px 0;
+        }
+        
+        .voter-card .voter-number {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            color: #e74c3c;
+            border-top: 1px dashed #ddd;
+            padding-top: 8px;
+        }
+        
+        .voter-card .card-message {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            color: #2c3e50;
+            border-top: 1px dashed #ddd;
+            padding-top: 8px;
+        }
+        
+        @media print {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(4, auto);
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .voter-card {
+                border: 2px solid #000;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            @page {
+                size: letter;
+                margin: 0.5in;
+            }
+        }
+        
+        /* New styles for enhancements */
+        .selection-print-combined {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #28a745;
+        }
+        
+        .selection-print-combined h4 {
+            color: #2e7d32;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .selection-print-combined .buttons {
+            margin: 0;
+            gap: 10px;
+        }
+        
+        .export-options {
+            background: linear-gradient(135deg, #e6f7ff, #cceeff);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #17a2b8;
+        }
+        
+        .export-options h4 {
+            color: #17a2b8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .section-toggle button {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .hidden-sections-control {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hidden-sections-control button {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        #printSection {
+            display: none;
+        }
+
+        /* NEW CSS FOR DUPLICATE ROW HIGHLIGHTING */
+        .dupe-group-even {
+            background-color: #fff3cd !important; /* Light yellow */
+        }
+
+        .dupe-group-odd {
+            background-color: #d4edda !important; /* Light green */
+        }
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body onload="initializeApp()">
-    <!-- Welcome Message -->
-    <div class="welcome-message" id="welcomeMessage">
-        <div class="welcome-content">
-            <div class="welcome-icon">
-                <i class="fas fa-users"></i>
-            </div>
-            <h2>Voter Data Management System V4</h2>
-            <p>This is a read-only, self-contained application. Data is loaded instantly and works offline.</p>
-            <button class="welcome-button" onclick="closeWelcomeMessage()">
-                Start Management <i class="fas fa-arrow-right"></i>
-            </button>
-        </div>
-    </div>
-    
     <div class="container">
         <h1><i class="fas fa-users"></i> BD BEANIBAZAR SHOMITI Voter Data Management System 2025</h1>
         <h2> Powered By: Nahidur Rahman</h2>
@@ -608,15 +888,91 @@
             <i class="fas fa-check-circle"></i> <span id="successText"></span>
         </div>
         
-        <div class="initial-load-section">
-            <h3><i class="fas fa-database"></i> Data Status: Loaded Instantly</h3>
-            <p id="dataLoadStatus">Initializing...</p>
+        <div class="hidden-sections-control">
+            <span>Show Hidden Sections:</span>
+            <button onclick="showSection('centerManagementSection')" class="btn-info"><i class="fas fa-map-marker-alt"></i> Center Management</button>
+            <button onclick="showSection('cardMessageSection')" class="btn-info"><i class="fas fa-comment-alt"></i> Card Message</button>
+        </div>
+        
+        <div class="center-management-section" id="centerManagementSection">
+            <div class="section-toggle">
+                <h3><i class="fas fa-map-marker-alt"></i> Center Management</h3>
+                <button class="btn-warning" onclick="hideSection('centerManagementSection')"><i class="fas fa-eye-slash"></i> Hide</button>
+            </div>
+            <div class="centers-container">
+                <div class="center-card">
+                    <h4><i class="fas fa-building"></i> Center 1: Queens</h4>
+                    <div class="form-group">
+                        <label for="center1City">Assign City to Queens Center:</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="center1City" list="datalistCity" style="flex: 1;">
+                            <button class="btn-primary" onclick="addCityToCenter(1)"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                    <div class="center-cities" id="center1Cities">
+                        </div>
+                </div>
+                <div class="center-card">
+                    <h4><i class="fas fa-building"></i> Center 2: Bronx</h4>
+                    <div class="form-group">
+                        <label for="center2City">Assign City to Bronx Center:</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="center2City" list="datalistCity" style="flex: 1;">
+                            <button class="btn-primary" onclick="addCityToCenter(2)"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                    <div class="center-cities" id="center2Cities">
+                        </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <button onclick="saveCenterConfiguration()" class="btn-success"><i class="fas fa-save"></i> Save Center Configuration</button>
+                <button onclick="clearCenterConfiguration()" class="btn-warning"><i class="fas fa-broom"></i> Clear Centers</button>
+            </div>
+        </div>
+        
+        <div class="card-message-section" id="cardMessageSection">
+            <div class="section-toggle">
+                <h4><i class="fas fa-comment-alt"></i> Voter Card Custom Message</h4>
+                <button class="btn-warning" onclick="hideSection('cardMessageSection')"><i class="fas fa-eye-slash"></i> Hide</button>
+            </div>
+            <input type="text" class="card-message-input" id="cardMessage" placeholder="Enter a custom message to print on voter cards">
+            <div style="margin-top: 10px; font-size: 12px; color: #6c757d;">
+                This message will appear on all printed voter cards in a large, prominent style.
+            </div>
+            <div class="buttons">
+                <button onclick="saveCardMessage()" class="btn-success"><i class="fas fa-save"></i> Save Message</button>
+            </div>
+        </div>
+        
+        <div class="selection-print-combined">
+            <div>
+                <h4><i class="fas fa-filter"></i> Selection Mode & Card Printing</h4>
+                <div class="selection-mode-toggle">
+                    <span>Apply filters to selected records only</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="selectionModeToggle" onchange="toggleSelectionMode()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="buttons">
+                <button onclick="printMultipleCards()" class="btn-success"><i class="fas fa-id-card"></i> Print Multiple Cards</button>
+            </div>
+        </div>
+        
+        <div class="export-options">
+            <h4><i class="fas fa-download"></i> Export & Download</h4>
+            <div class="buttons">
+                <button onclick="exportSingleVoterCardAsPNG(null)" class="btn-info"><i class="fas fa-file-image"></i> Export Selected Card as PNG</button>
+                <button onclick="exportVoterCardsAsZip('selected')" class="btn-success"><i class="fas fa-file-archive"></i> Export Selected as .ZIP</button>
+                <button onclick="exportVoterCardsAsZip('all')" class="btn-primary"><i class="fas fa-file-archive"></i> Export All Filtered as .ZIP</button>
+            </div>
         </div>
         
         <div class="warning-section" id="warningSection">
             <div id="duplicateSummary">
-                <!-- Content injected by JavaScript -->
-            </div>
+                </div>
             <div class="buttons" style="justify-content: flex-start; margin-top: 10px;">
                 <button onclick="openDuplicateListModal(this)" class="btn-primary" id="viewDuplicatesBtn" style="display: none;">
                     <i class="fas fa-list"></i> View Duplicate Groups
@@ -645,17 +1001,14 @@
         </div>
         
         <div class="stats" id="stats" style="display: none;">
-             <!-- Stat cards -->
             <div class="stat-card"><span class="stat-number" id="totalRecords">0</span><span class="stat-label">Total Records</span></div>
             <div class="stat-card"><span class="stat-number" id="filteredRecords">0</span><span class="stat-label">Filtered Records</span></div>
             <div class="stat-card"><span class="stat-number" id="selectedRecords">0</span><span class="stat-label">Selected Records</span></div>
             <div class="stat-card"><span class="stat-number" id="duplicateCount">0</span><span class="stat-label">Duplicate Groups</span></div>
-            <div class="stat-card"><span class="stat-number" id="bookCount">0</span><span class="stat-label">Total Books</span></div>
-            <div class="stat-card"><span class="stat-number" id="missingBookCount">0</span><span class="stat-label">Missing Books</span></div>
         </div>
         
         <div class="advanced-filters" id="advancedFilters" style="display: none;">
-             <h4><i class="fas fa-filter"></i> Advanced Search Options</h4>
+            <h4><i class="fas fa-filter"></i> Advanced Search Options</h4>
             <div class="voter-number-sorting">
                 <h5><i class="fas fa-sort-numeric-down"></i> Voter Number String Filtering</h5>
                 <div class="sort-options">
@@ -677,7 +1030,6 @@
                 </div>
             </div>
             <div class="multi-select-grid">
-                <!-- Multi-selects populated by JS -->
                 <div class="multi-select-group"><label><i class="fas fa-home"></i> Villages:</label><select multiple class="multi-select" id="multiVillage"></select></div>
                 <div class="multi-select-group"><label><i class="fas fa-city"></i> Cities:</label><select multiple class="multi-select" id="multiCity"></select></div>
                 <div class="multi-select-group"><label><i class="fas fa-mail-bulk"></i> ZIPs:</label><select multiple class="multi-select" id="multiZip"></select></div>
@@ -685,6 +1037,7 @@
                 <div class="multi-select-group"><label><i class="fas fa-map-marker-alt"></i> Addresses:</label><select multiple class="multi-select" id="multiAddress"></select></div>
                 <div class="multi-select-group"><label><i class="fas fa-building"></i> Unions:</label><select multiple class="multi-select" id="multiUnion"></select></div>
                 <div class="multi-select-group"><label><i class="fas fa-flag"></i> States:</label><select multiple class="multi-select" id="multiState"></select></div>
+                <div class="multi-select-group"><label><i class="fas fa-map-marker-alt"></i> Centers:</label><select multiple class="multi-select" id="multiCenter"></select></div>
             </div>
             <div class="buttons">
                 <button onclick="applyFilters(this)" class="btn-success"><i class="fas fa-filter"></i> Apply Advanced</button>
@@ -699,25 +1052,41 @@
             </div>
         </div>
         
+        <div class="enhanced-print-options">
+            <h4><i class="fas fa-print"></i> Enhanced Printing Options</h4>
+            <div class="print-grid">
+                <div>
+                    <h5>Multi-Card Printing</h5>
+                    <p>Print up to 12 voter cards per page in a grid layout.</p>
+                </div>
+                <div>
+                    <h5>Print Operations</h5>
+                    <div class="buttons">
+                        <button onclick="printAllFiltered(this)" class="btn-success"><i class="fas fa-print"></i> Print Filtered</button>
+                        <button onclick="printSelected(this)" class="btn-info"><i class="fas fa-print"></i> Print Selected</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="filters">
-             <!-- Basic filter inputs -->
+            <div class="filter-group"><label for="filterVoterNumber"><i class="fas fa-id-card"></i> Voter Number:</label><input type="text" id="filterVoterNumber"></div>
             <div class="filter-group"><label for="filterFirstName"><i class="fas fa-user"></i> First Name:</label><input type="text" id="filterFirstName"></div>
             <div class="filter-group"><label for="filterLastName"><i class="fas fa-user"></i> Last Name:</label><input type="text" id="filterLastName"></div>
             <div class="filter-group"><label for="filterPhone"><i class="fas fa-phone"></i> Phone:</label><input type="text" id="filterPhone"></div>
             <div class="filter-group"><label for="filterGender"><i class="fas fa-venus-mars"></i> Gender:</label><input type="text" id="filterGender"></div>
             <div class="filter-group"><label for="filterBookNo"><i class="fas fa-book"></i> Book No:</label><input type="text" id="filterBookNo"></div>
             <div class="filter-group"><label for="filterState"><i class="fas fa-flag"></i> State:</label><input type="text" id="filterState"></div>
+            <div class="filter-group"><label for="filterCenter"><i class="fas fa-map-marker-alt"></i> Center:</label><input type="text" id="filterCenter"></div>
         </div>
         
         <div class="buttons">
             <button onclick="applyFilters(this)" class="btn-primary"><i class="fas fa-filter"></i> Apply Filters</button>
             <button onclick="toggleAdvancedFilters(this)" class="btn-info"><i class="fas fa-cogs"></i> Advanced Search</button>
             <button onclick="clearFilters(this)" class="btn-warning"><i class="fas fa-broom"></i> Clear All Filters</button>
-            <button onclick="checkDuplicates(this)" class="btn-danger"><i class="fas fa-users-slash"></i> Check Duplicates</button>
-            <button onclick="checkMissingBooks(this)" class="btn-danger"><i class="fas fa-search"></i> Check Missing Books</button>
-            <button onclick="analyzeBookGaps(this)" class="btn-info"><i class="fas fa-chart-bar"></i> Analyze Gaps</button>
-            <button onclick="printAllFiltered(this)" class="btn-success"><i class="fas fa-print"></i> Print Filtered</button>
+            <button onclick="openDuplicateOptionsModal()" class="btn-danger"><i class="fas fa-users-slash"></i> Check Duplicates</button>
             <button onclick="openAddVoterModal(this)" class="btn-primary"><i class="fas fa-plus"></i> Add New Voter</button>
+            <button onclick="deleteSelectedVoters()" class="btn-danger"><i class="fas fa-trash"></i> Delete Selected</button>
         </div>
         
         <div class="table-container">
@@ -738,6 +1107,8 @@
                         <th data-column="UNION">UNION</th>
                         <th data-column="VILLAGE">VILLAGE</th>
                         <th data-column="BK#">BK#</th>
+                        <th data-column="CENTER">CENTER</th>
+                        <th data-column="_dupeGroupId">Dup. Group</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
@@ -750,23 +1121,20 @@
     </div>
     
     <div class="floating-actions" id="floatingActions">
-        <!-- For single selection -->
         <button onclick="triggerEditSelected(this)" class="btn-primary" id="floatingEditBtn" style="display: none;">
             <i class="fas fa-edit"></i> Edit Selected
         </button>
         <button onclick="triggerPrintCardSelected(this)" class="btn-info" id="floatingCardBtn" style="display: none;">
-            <i class="fas fa-id-card"></i> Print Voter Card
+            <i class="fas fa-id-card"></i> Print/Export Card
         </button>
         <button onclick="openDuplicateDetailsModal(this)" class="btn-warning" id="floatingDuplicateDetailsBtn" style="display: none;">
             <i class="fas fa-eye"></i> View Duplicate Details
         </button>
-        <!-- For multiple selections -->
         <button onclick="printSelected(this)" class="btn-success" id="floatingPrintBtn" style="display: none;">
             <i class="fas fa-print"></i> Print Selected (<span id="floatingPrintCount">0</span>)
         </button>
     </div>
 
-    <!-- Modals -->
     <div class="modal" id="voterModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -800,6 +1168,14 @@
                     <div class="form-group"><label for="village">Village</label><input type="text" id="village" list="datalistVillage"></div>
                     <div class="form-group"><label for="bookNumber">Book Number</label><input type="text" id="bookNumber"></div>
                 </div>
+                <div class="form-group">
+                    <label for="center">Center</label>
+                    <select id="center">
+                        <option value="">Not Assigned</option>
+                        <option value="Queens">Queens</option>
+                        <option value="Bronx">Bronx</option>
+                    </select>
+                </div>
                 <datalist id="datalistCity"></datalist><datalist id="datalistState"></datalist><datalist id="datalistUnion"></datalist><datalist id="datalistVillage"></datalist>
                 <div class="form-actions">
                     <button type="button" class="btn-warning" onclick="closeVoterModal()">Cancel</button>
@@ -816,8 +1192,7 @@
                 <button class="close-modal" onclick="closeDuplicateListModal()">&times;</button>
             </div>
             <div class="warning-list" id="warningList">
-                <!-- Content generated by JS -->
-            </div>
+                </div>
             <div class="form-actions">
                 <button type="button" class="btn-warning" onclick="closeDuplicateListModal()">Close</button>
             </div>
@@ -838,26 +1213,96 @@
         </div>
     </div>
 
+    <div class="modal duplicate-options-modal" id="duplicateOptionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Duplicate Detection Options</h3>
+                <button class="close-modal" onclick="closeDuplicateOptionsModal()">&times;</button>
+            </div>
+            <div>
+                <h4>Select Fields to Match For Duplicate Detection:</h4>
+                <div class="duplicate-field-options">
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="dupFirstName" checked>
+                        <label for="dupFirstName">First Name</label>
+                    </div>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="dupLastName" checked>
+                        <label for="dupLastName">Last Name</label>
+                    </div>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="dupYOB" checked>
+                        <label for="dupYOB">Year of Birth</label>
+                    </div>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="dupVillage" checked>
+                        <label for="dupVillage">Village</label>
+                    </div>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="dupCity">
+                        <label for="dupCity">City</label>
+                    </div>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="dupPhone">
+                        <label for="dupPhone">Phone</label>
+                    </div>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="dupAddress">
+                        <label for="dupAddress">Address</label>
+                    </div>
+                </div>
+                
+                <div class="cross-location-options">
+                    <h5>Cross-Location Duplicate Detection:</h5>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="crossCity">
+                        <label for="crossCity">Check across different Cities</label>
+                    </div>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="crossVillage">
+                        <label for="crossVillage">Check across different Villages</label>
+                    </div>
+                    <div class="duplicate-option">
+                        <input type="checkbox" id="crossCenter">
+                        <label for="crossCenter">Check across different Centers</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-warning" onclick="closeDuplicateOptionsModal()">Cancel</button>
+                <button type="button" class="btn-success" onclick="applyDuplicateOptions()">Run Duplicate Check</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Global variables
-        let voterData = [];
+        let voterData = []; // PASTE YOUR VOTER DATA HERE
         let filteredData = [];
         let duplicateGroups = [];
-        let duplicateVoterIdMap = new Map(); // Maps voter ID to its duplicate group
+        let duplicateVoterIdMap = new Map();
         let selectedRecords = [];
         let currentSortColumn = 'VOTER #';
         let currentSortDirection = 'asc';
+        let selectionMode = false; // When true, filters apply to selected records only
+        let centerMapping = { 
+            Queens: [], 
+            Bronx: [] 
+        };
+        let cardMessage = "";
+        let isDuplicateViewActive = false; // State to track if we are in duplicate view mode
         
         // --- UTILITY & SETUP ---
         
         function initializeApp() {
             loadVoterData();
+            loadSettings();
             updateStatus("Data loaded. Ready to use.");
-            document.getElementById('dataLoadStatus').textContent = `Loaded ${voterData.length} voter records`;
             document.getElementById('stats').style.display = 'flex';
             
             populateMultiSelects();
             populateDataLists();
+            renderCenterCities();
             applyFilters();
             
             document.querySelectorAll('th[data-column]').forEach(th => {
@@ -865,11 +1310,14 @@
             });
 
             document.getElementById('voterForm').addEventListener('submit', saveVoter);
-            setTimeout(closeWelcomeMessage, 2000);
         }
 
         function loadVoterData() {
-             voterData = [  {
+            // Data is now manually pasted into the voterData variable above.
+            
+            // --- PASTE YOUR VOTER DATA ARRAY HERE ---
+            voterData = [
+             {
     "VOTER #": "B-L-1",
     "FIRST NAME": "A.",
     "LAST NAME": "AHMED (ZAKIR)",
@@ -136916,66 +137364,174 @@
     "VILLAGE": "NALBAHAR",
     "BK#": "282",
     "": ""
-  } ];
-            voterData.forEach((voter, index) => voter.id = index + 1);
+  }
+            ];
+            
+            // Ensure each voter has an ID for selection handling
+            voterData.forEach((voter, index) => {
+                if (!voter.id) voter.id = index + 1;
+            });
+
+            saveVoterData();
         }
-        
+
+        function saveVoterData() {
+            localStorage.setItem('voterData', JSON.stringify(voterData));
+        }
+
+        function loadSettings() {
+            const savedCenters = localStorage.getItem('voterCenterMapping');
+            if (savedCenters) {
+                centerMapping = JSON.parse(savedCenters);
+            }
+            const savedMessage = localStorage.getItem('voterCardMessage');
+            if (savedMessage) {
+                document.getElementById('cardMessage').value = savedMessage;
+                cardMessage = savedMessage;
+            }
+            const centerVisible = localStorage.getItem('centerManagementVisible');
+            if (centerVisible === 'false') {
+                document.getElementById('centerManagementSection').style.display = 'none';
+            }
+            const cardMessageVisible = localStorage.getItem('cardMessageVisible');
+            if (cardMessageVisible === 'false') {
+                document.getElementById('cardMessageSection').style.display = 'none';
+            }
+        }
+        function saveSettings() {
+            localStorage.setItem('voterCenterMapping', JSON.stringify(centerMapping));
+            localStorage.setItem('voterCardMessage', cardMessage);
+        }
+        function hideSection(sectionId) {
+            document.getElementById(sectionId).style.display = 'none';
+            localStorage.setItem(sectionId + 'Visible', 'false');
+        }
+        function showSection(sectionId) {
+            document.getElementById(sectionId).style.display = 'block';
+            localStorage.setItem(sectionId + 'Visible', 'true');
+        }
+        function saveCardMessage() {
+            cardMessage = document.getElementById('cardMessage').value;
+            saveSettings();
+            showSuccessMessage('Card message saved successfully.');
+        }
         function getUniqueValues(field) {
             const values = new Set(voterData.map(v => v[field]).filter(val => val && val.trim() !== ''));
             return Array.from(values).sort();
         }
-
         function populateMultiSelects() {
-            const selects = {'VILLAGE':'multiVillage','CITY':'multiCity','ZIP':'multiZip','YOB':'multiYOB','ADDRESS':'multiAddress','UNION':'multiUnion','ST':'multiState'};
+            const selects = {
+                'VILLAGE':'multiVillage', 'CITY':'multiCity', 'ZIP':'multiZip', 'YOB':'multiYOB', 'ADDRESS':'multiAddress', 'UNION':'multiUnion', 'ST':'multiState', 'CENTER':'multiCenter'
+            };
             for (const [dataField, selectId] of Object.entries(selects)) {
                 document.getElementById(selectId).innerHTML = getUniqueValues(dataField).map(value => `<option value="${value}">${value}</option>`).join('');
             }
         }
-        
         function populateDataLists() {
             const datalists = {'CITY':'datalistCity','ST':'datalistState','UNION':'datalistUnion','VILLAGE':'datalistVillage'};
             for (const [dataField, listId] of Object.entries(datalists)) {
                 document.getElementById(listId).innerHTML = getUniqueValues(dataField).map(value => `<option value="${value}"></option>`).join('');
             }
         }
-
         function addFeedback(button) {
             if (button) {
                 button.classList.add('active');
                 setTimeout(() => button.classList.remove('active'), 300);
             }
         }
-
         function updateStatus(message) {
             document.getElementById('status').innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
         }
-
         function showSuccessMessage(message) {
             const successMessage = document.getElementById('successMessage');
             successMessage.style.display = 'block';
             document.getElementById('successText').textContent = message;
             setTimeout(() => successMessage.style.display = 'none', 5000);
         }
+        function addCityToCenter(centerNumber) {
+            const centerName = centerNumber === 1 ? 'Queens' : 'Bronx';
+            const inputId = `center${centerNumber}City`;
+            const city = document.getElementById(inputId).value.trim();
+            if (!city) return;
+            const otherCenter = centerNumber === 1 ? 'Bronx' : 'Queens';
+            centerMapping[otherCenter] = centerMapping[otherCenter].filter(c => c !== city);
 
-        function closeWelcomeMessage() {
-            const welcome = document.getElementById('welcomeMessage');
-            if(welcome) {
-                welcome.style.opacity = '0';
-                setTimeout(() => welcome.style.display = 'none', 1000);
+            if (!centerMapping[centerName].includes(city)) {
+                centerMapping[centerName].push(city);
+                renderCenterCities();
+                document.getElementById(inputId).value = '';
             }
         }
+        function removeCityFromCenter(centerName, city) {
+            centerMapping[centerName] = centerMapping[centerName].filter(c => c !== city);
+            renderCenterCities();
+        }
+        function renderCenterCities() {
+            const center1Cities = document.getElementById('center1Cities');
+            const center2Cities = document.getElementById('center2Cities');
+            center1Cities.innerHTML = centerMapping.Queens.map(city => `<div class="city-tag">${city} <button onclick="removeCityFromCenter('Queens', '${city}')"><i class="fas fa-times"></i></button></div>`).join('');
+            center2Cities.innerHTML = centerMapping.Bronx.map(city => `<div class="city-tag">${city} <button onclick="removeCityFromCenter('Bronx', '${city}')"><i class="fas fa-times"></i></button></div>`).join('');
+        }
+        function saveCenterConfiguration() {
+            voterData.forEach(voter => {
+                if (voter.CITY) {
+                    if (centerMapping.Queens.includes(voter.CITY)) voter.CENTER = 'Queens';
+                    else if (centerMapping.Bronx.includes(voter.CITY)) voter.CENTER = 'Bronx';
+                    else voter.CENTER = '';
+                }
+            });
+            saveSettings();
+            saveVoterData();
+            applyFilters();
+            showSuccessMessage('Center configuration saved successfully.');
+        }
+        function clearCenterConfiguration() {
+            centerMapping = { Queens: [], Bronx: [] };
+            voterData.forEach(voter => voter.CENTER = '');
+            renderCenterCities();
+            saveSettings();
+            saveVoterData();
+            applyFilters();
+            showSuccessMessage('Center configuration cleared.');
+        }
+        function toggleSelectionMode() {
+            selectionMode = document.getElementById('selectionModeToggle').checked;
+            updateStatus(selectionMode ? 'Filters will now apply to selected records only.' : 'Filters will now apply to all records.');
+            applyFilters();
+        }
 
-        // --- FILTERING & DATA LOGIC ---
-
+        // --- FILTERING & DATA LOGIC (MODIFIED) ---
         function applyFilters(button) {
             if(button) addFeedback(button);
+
+            let baseData;
+            if (isDuplicateViewActive) {
+                // In duplicate view, our universe is only the records identified as duplicates.
+                const duplicateIds = new Set(duplicateGroups.flat().map(v => v.id));
+                baseData = voterData.filter(v => duplicateIds.has(v.id));
+            } else {
+                // Normally, our universe is all the data.
+                baseData = voterData;
+                // If not in dupe view, ensure the warning banner is hidden.
+                if (document.getElementById('warningSection').style.display === 'block') {
+                    duplicateGroups = [];
+                    renderDuplicateSummary();
+                }
+            }
+            
+            let dataToFilter = selectionMode && selectedRecords.length > 0 ?
+                baseData.filter(v => selectedRecords.includes(v.id)) :
+                baseData;
+
             const basicFilters = {
+                'VOTER #': document.getElementById('filterVoterNumber').value.toLowerCase().trim(),
                 'FIRST NAME': document.getElementById('filterFirstName').value.toLowerCase().trim(),
                 'LAST NAME': document.getElementById('filterLastName').value.toLowerCase().trim(),
                 'PHONE': document.getElementById('filterPhone').value.toLowerCase().trim(),
                 'GEN.': document.getElementById('filterGender').value.toLowerCase().trim(),
                 'BK#': document.getElementById('filterBookNo').value.toLowerCase().trim(),
-                'ST': document.getElementById('filterState').value.toLowerCase().trim()
+                'ST': document.getElementById('filterState').value.toLowerCase().trim(),
+                'CENTER': document.getElementById('filterCenter').value.toLowerCase().trim()
             };
 
             const advancedFilters = {
@@ -136989,19 +137545,23 @@
                 yobs: Array.from(document.getElementById('multiYOB').selectedOptions).map(opt => opt.value),
                 addresses: Array.from(document.getElementById('multiAddress').selectedOptions).map(opt => opt.value),
                 unions: Array.from(document.getElementById('multiUnion').selectedOptions).map(opt => opt.value),
-                states: Array.from(document.getElementById('multiState').selectedOptions).map(opt => opt.value)
+                states: Array.from(document.getElementById('multiState').selectedOptions).map(opt => opt.value),
+                centers: Array.from(document.getElementById('multiCenter').selectedOptions).map(opt => opt.value)
             };
 
-            filteredData = voterData.filter(voter => {
+            filteredData = dataToFilter.filter(voter => {
                 for (const key in basicFilters) {
                     if (basicFilters[key] && !(voter[key] || '').toString().toLowerCase().includes(basicFilters[key])) return false;
                 }
+
                 const voterNumber = (voter['VOTER #'] || '').toLowerCase();
                 if (advancedFilters.contains && !voterNumber.includes(advancedFilters.contains)) return false;
                 if (advancedFilters.notContains && voterNumber.includes(advancedFilters.notContains)) return false;
+                
                 const bookNo = parseInt(voter['BK#']);
                 if (advancedFilters.minBook && (isNaN(bookNo) || bookNo < advancedFilters.minBook)) return false;
                 if (advancedFilters.maxBook && (isNaN(bookNo) || bookNo > advancedFilters.maxBook)) return false;
+
                 if (advancedFilters.villages.length && !advancedFilters.villages.includes(voter['VILLAGE'])) return false;
                 if (advancedFilters.cities.length && !advancedFilters.cities.includes(voter['CITY'])) return false;
                 if (advancedFilters.zips.length && !advancedFilters.zips.includes(voter['ZIP'])) return false;
@@ -137009,20 +137569,24 @@
                 if (advancedFilters.addresses.length && !advancedFilters.addresses.includes(voter['ADDRESS'])) return false;
                 if (advancedFilters.unions.length && !advancedFilters.unions.includes(voter['UNION'])) return false;
                 if (advancedFilters.states.length && !advancedFilters.states.includes(voter['ST'])) return false;
+                if (advancedFilters.centers.length && !advancedFilters.centers.includes(voter['CENTER'])) return false;
+
                 return true;
             });
             
-            duplicateGroups = [];
-            duplicateVoterIdMap.clear();
-            renderDuplicateSummary();
             sortTable(currentSortColumn, true);
         }
-
-        function clearFilters(button) {
+        function clearFilters(button) { // MODIFIED
             addFeedback(button);
+            isDuplicateViewActive = false; // Explicitly turn off duplicate mode
+
+            // Clean up temporary properties from the master data
+            voterData.forEach(v => delete v._dupeGroupId);
+            
             document.querySelectorAll('.filters input').forEach(input => input.value = '');
             clearAdvancedFilters();
-            applyFilters();
+            
+            applyFilters(); // This will now run on the full voterData set and hide the warning banner
             updateStatus('All filters cleared.');
         }
 
@@ -137036,39 +137600,43 @@
                 Array.from(select.options).forEach(option => option.selected = false);
             });
         }
-        
+
         function toggleAdvancedFilters(button) {
             addFeedback(button);
             const advancedFilters = document.getElementById('advancedFilters');
             advancedFilters.style.display = advancedFilters.style.display === 'none' ? 'block' : 'none';
         }
-        
-        // --- TABLE RENDERING & SORTING ---
 
+        // --- TABLE RENDERING & SORTING ---
         function renderTable() {
             const tableBody = document.getElementById('tableBody');
             if (filteredData.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="14" style="text-align: center; padding: 20px;">No records found.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="16" style="text-align: center; padding: 20px;">No records found.</td></tr>`;
             } else {
                 tableBody.innerHTML = filteredData.map(voter => {
                     const isSelected = selectedRecords.includes(voter.id);
+                    const dupeClass = voter._dupeGroupId ? (voter._dupeGroupId % 2 === 0 ? 'dupe-group-even' : 'dupe-group-odd') : '';
+
                     return `
-                        <tr class="${isSelected ? 'table-info' : ''}">
+                        <tr class="${isSelected ? 'table-info' : ''} ${dupeClass}">
                             <td class="no-print"><input type="checkbox" onchange="toggleSelectRecord(${voter.id}, this.checked)" ${isSelected ? 'checked' : ''}></td>
                             <td>${voter['VOTER #'] || ''}</td><td>${voter['FIRST NAME'] || ''}</td><td>${voter['LAST NAME'] || ''}</td>
                             <td>${voter['YOB'] || ''}</td><td>${voter['GEN.'] || ''}</td><td>${voter['ADDRESS'] || ''}</td>
                             <td>${voter['CITY'] || ''}</td><td>${voter['ST'] || ''}</td><td>${voter['ZIP'] || ''}</td>
                             <td>${voter['PHONE'] || ''}</td><td>${voter['UNION'] || ''}</td><td>${voter['VILLAGE'] || ''}</td>
                             <td>${voter['BK#'] || ''}</td>
+                            <td>${voter['CENTER'] || ''}</td>
+                            <td>${voter._dupeGroupId || ''}</td>
                         </tr>`;
                 }).join('');
             }
             updateStatistics();
             updateFloatingActions();
         }
-        
+
         function sortTable(columnName, keepDirection = false) {
             const th = document.querySelector(`th[data-column="${columnName}"]`);
+
             if (!keepDirection) {
                 if (currentSortColumn === columnName) {
                     currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
@@ -137077,36 +137645,39 @@
                     currentSortDirection = 'asc';
                 }
             }
-            
+
             document.querySelectorAll('th').forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
             th.classList.add(currentSortDirection === 'asc' ? 'sorted-asc' : 'sorted-desc');
-            
+
             filteredData.sort((a, b) => {
                 let aVal = a[columnName] || '';
                 let bVal = b[columnName] || '';
+
                 if (!isNaN(aVal) && !isNaN(bVal) && aVal !== '' && bVal !== '') {
                     return currentSortDirection === 'asc' ? aVal - bVal : bVal - aVal;
                 }
-                return currentSortDirection === 'asc' ? 
-                    aVal.toString().localeCompare(bVal.toString(), undefined, {numeric: true}) : 
+
+                return currentSortDirection === 'asc' ?
+                    aVal.toString().localeCompare(bVal.toString(), undefined, {numeric: true}) :
                     bVal.toString().localeCompare(aVal.toString(), undefined, {numeric: true});
             });
+
             renderTable();
         }
-
+        
         // --- SELECTION HANDLING ---
-
         function toggleSelectAll(checkbox) {
             selectedRecords = checkbox.checked ? filteredData.map(voter => voter.id) : [];
             renderTable();
         }
-        
+
         function toggleSelectRecord(id, isSelected) {
             if (isSelected) {
                 if (!selectedRecords.includes(id)) selectedRecords.push(id);
             } else {
                 selectedRecords = selectedRecords.filter(recId => recId !== id);
             }
+
             const selectAll = document.getElementById('selectAll');
             selectAll.checked = selectedRecords.length > 0 && selectedRecords.length === filteredData.length;
             selectAll.indeterminate = selectedRecords.length > 0 && selectedRecords.length < filteredData.length;
@@ -137120,6 +137691,7 @@
             const cardBtn = document.getElementById('floatingCardBtn');
             const duplicateDetailsBtn = document.getElementById('floatingDuplicateDetailsBtn');
             const printBtn = document.getElementById('floatingPrintBtn');
+
             actionsDiv.style.display = count > 0 ? 'flex' : 'none';
 
             if (count === 1) {
@@ -137140,129 +137712,130 @@
             addFeedback(button);
             if (selectedRecords.length === 1) editVoter(selectedRecords[0]);
         }
-        
+
         function triggerPrintCardSelected(button) {
             addFeedback(button);
             if (selectedRecords.length === 1) {
                 const voter = voterData.find(v => v.id === selectedRecords[0]);
-                if (voter) printVoterCard(voter);
+                if (voter) {
+                    if (confirm('Do you want to export this voter card as PNG instead of printing?\n\nClick OK for PNG export, Cancel for regular print.')) {
+                        exportSingleVoterCardAsPNG(voter);
+                    } else {
+                        printVoterCard(voter);
+                    }
+                }
             }
         }
-        
-        // --- DUPLICATE HANDLING ---
 
+        // --- DUPLICATE HANDLING (MODIFIED) ---
+        function openDuplicateOptionsModal() {
+            document.getElementById('duplicateOptionsModal').style.display = 'flex';
+        }
+        function closeDuplicateOptionsModal() {
+            document.getElementById('duplicateOptionsModal').style.display = 'none';
+        }
+        function applyDuplicateOptions() {
+            closeDuplicateOptionsModal();
+            checkDuplicates();
+        }
         function checkDuplicates(button) {
-            addFeedback(button);
+            if(button) addFeedback(button);
+
             const dataToCheck = filteredData;
-            const CRITICAL_FIELDS = ['FIRST NAME', 'LAST NAME', 'YOB', 'VILLAGE'];
+            
+            const matchFields = [];
+            if (document.getElementById('dupFirstName').checked) matchFields.push('FIRST NAME');
+            if (document.getElementById('dupLastName').checked) matchFields.push('LAST NAME');
+            if (document.getElementById('dupYOB').checked) matchFields.push('YOB');
+            if (document.getElementById('dupVillage').checked) matchFields.push('VILLAGE');
+            if (document.getElementById('dupCity').checked) matchFields.push('CITY');
+            if (document.getElementById('dupPhone').checked) matchFields.push('PHONE');
+            if (document.getElementById('dupAddress').checked) matchFields.push('ADDRESS');
+
+            if (matchFields.length === 0) {
+                updateStatus("Please select at least one field to match for duplicate detection.");
+                return;
+            }
+
+            const crossCity = document.getElementById('crossCity').checked;
+            const crossVillage = document.getElementById('crossVillage').checked;
+            const crossCenter = document.getElementById('crossCenter').checked;
+
             const groups = {};
             duplicateVoterIdMap.clear();
 
             dataToCheck.forEach(voter => {
-                const key = CRITICAL_FIELDS.map(field => (voter[field] || '').trim().toLowerCase()).join('|');
-                if (CRITICAL_FIELDS.some(field => !(voter[field] || '').trim())) return; 
+                if (matchFields.some(field => !(voter[field] || '').trim())) return;
+                let key = matchFields.map(field => (voter[field] || '').trim().toLowerCase()).join('|');
+                
+                if ((crossCity && matchFields.includes('CITY')) || (crossVillage && matchFields.includes('VILLAGE')) || (crossCenter && matchFields.includes('CENTER'))) {
+                    const baseFields = matchFields.filter(f => !((crossCity && f === 'CITY') || (crossVillage && f === 'VILLAGE') || (crossCenter && f === 'CENTER')));
+                    if (baseFields.length > 0) {
+                        key = baseFields.map(field => (voter[field] || '').trim().toLowerCase()).join('|');
+                    }
+                }
+                
                 if (!groups[key]) groups[key] = [];
                 groups[key].push(voter);
             });
-            
+
             duplicateGroups = Object.values(groups).filter(group => group.length > 1);
-            duplicateGroups.forEach(group => group.forEach(voter => duplicateVoterIdMap.set(voter.id, group)));
-            renderDuplicateSummary();
-            updateFloatingActions();
+
+            if (duplicateGroups.length > 0) {
+                isDuplicateViewActive = true;
+                voterData.forEach(v => delete v._dupeGroupId);
+
+                duplicateGroups.forEach((group, index) => {
+                    group.forEach(voter => {
+                        const masterVoterRecord = voterData.find(v => v.id === voter.id);
+                        if (masterVoterRecord) masterVoterRecord._dupeGroupId = index + 1;
+                        duplicateVoterIdMap.set(voter.id, group);
+                    });
+                });
+
+                renderDuplicateSummary();
+                applyFilters(); // Re-apply current filters, but now in duplicate mode.
+                updateStatus(`Switched to Duplicate View. Use filters to narrow down results or 'Clear All Filters' to exit.`);
+            } else {
+                isDuplicateViewActive = false;
+                duplicateGroups = [];
+                renderDuplicateSummary();
+                updateStatus("No duplicates found with the current criteria.");
+            }
         }
 
         function renderDuplicateSummary() {
             const section = document.getElementById('warningSection');
             const summaryDiv = document.getElementById('duplicateSummary');
-            const viewBtn = document.getElementById('viewDuplicatesBtn');
+            document.getElementById('viewDuplicatesBtn').style.display = 'none';
+
             const totalGroups = duplicateGroups.length;
             document.getElementById('duplicateCount').textContent = totalGroups;
 
-            if (totalGroups > 0) {
-                summaryDiv.innerHTML = `<h4><i class="fas fa-exclamation-triangle"></i> ${totalGroups} Potential Duplicate Voter Groups Found (within current filters)</h4>`;
-                viewBtn.style.display = 'block';
+            if (totalGroups > 0 && isDuplicateViewActive) {
+                summaryDiv.innerHTML = `<h4><i class="fas fa-exclamation-triangle"></i> DUPLICATE VIEW ACTIVE (${totalGroups} Groups Found). <span style="font-weight:normal; font-size: 0.9em;">Click 'Clear All Filters' to exit this view.</span></h4>`;
                 section.style.display = 'block';
-                updateStatus(`Found ${totalGroups} potential duplicate groups.`);
             } else {
-                if (section.style.display === 'block') {
-                    summaryDiv.innerHTML = `<h4><i class="fas fa-check-circle"></i> No critical duplicates found in the filtered results.</h4>`;
-                    viewBtn.style.display = 'none';
-                } else {
-                     section.style.display = 'none';
-                }
+                section.style.display = 'none';
             }
-        }
-
-        function openDuplicateListModal(button) {
-            addFeedback(button);
-            const listContainer = document.getElementById('warningList');
-            
-            const groupsOfTwo = duplicateGroups.filter(g => g.length === 2);
-            const groupsOfThree = duplicateGroups.filter(g => g.length === 3);
-            const groupsOfMore = duplicateGroups.filter(g => g.length > 3);
-
-            if (duplicateGroups.length === 0) {
-                listContainer.innerHTML = '<div class="status" style="text-align:center;">No duplicate groups found for the current filters.</div>';
-                document.getElementById('duplicateListModal').style.display = 'flex';
-                return;
-            }
-
-            const renderSection = (title, groups, categoryId) => {
-                if (groups.length === 0) return '';
-                let sectionHtml = `
-                    <div class="duplicate-category-section">
-                        <div class="duplicate-category-header">
-                            <h4>${title} (${groups.length} Groups)</h4>
-                            <button class="btn-success" onclick="printDuplicateCategory('${categoryId}', this)">
-                                <i class="fas fa-print"></i> Print This Section
-                            </button>
-                        </div>`;
-                
-                groups.forEach((group) => {
-                    const originalIndex = duplicateGroups.findIndex(g => g[0].id === group[0].id);
-                    const base = group[0];
-                    sectionHtml += `
-                        <div class="duplicate-group">
-                            <div class="duplicate-group-header">
-                                <span>Group: <strong>${base['FIRST NAME']} ${base['LAST NAME']}</strong> (${group.length} Records)</span>
-                                <button class="btn-info" style="padding: 5px 10px; font-size: 12px;" onclick="showDuplicateGroupDetails(${originalIndex})">
-                                    <i class="fas fa-search-plus"></i> Compare Details
-                                </button>
-                            </div>
-                            <div class="duplicate-matching-fields">
-                                <strong>Matching On:</strong> ${base['FIRST NAME']} | ${base['LAST NAME']} | ${base['YOB']} | ${base['VILLAGE']}
-                            </div>
-                        </div>`;
-                });
-                sectionHtml += '</div>';
-                return sectionHtml;
-            };
-
-            let contentHtml = renderSection('Groups with 2 Records', groupsOfTwo, 'two');
-            contentHtml += renderSection('Groups with 3 Records', groupsOfThree, 'three');
-            contentHtml += renderSection('Groups with more than 3 Records', groupsOfMore, 'more');
-            
-            listContainer.innerHTML = contentHtml;
-            document.getElementById('duplicateListModal').style.display = 'flex';
         }
         
-        function closeDuplicateListModal() {
-            document.getElementById('duplicateListModal').style.display = 'none';
-        }
-
         function showDuplicateGroupDetails(groupIndex) {
             const group = duplicateGroups[groupIndex];
             if (!group) return;
 
             const base = group[0];
             document.getElementById('duplicateModalTitle').textContent = `Side-by-Side Comparison for: ${base['FIRST NAME']} ${base['LAST NAME']}`;
-            const fieldsToCompare = ['VOTER #', 'FIRST NAME', 'LAST NAME', 'YOB', 'VILLAGE', 'BK#', 'ADDRESS', 'CITY', 'ST', 'ZIP', 'PHONE', 'GEN.', 'UNION'];
+            
+            const fieldsToCompare = ['VOTER #', 'FIRST NAME', 'LAST NAME', 'YOB', 'VILLAGE', 'BK#', 'ADDRESS', 'CITY', 'ST', 'ZIP', 'PHONE', 'GEN.', 'UNION', 'CENTER'];
             const highlightedFields = ['FIRST NAME', 'LAST NAME', 'YOB', 'VILLAGE'];
+
             let comparisonHtml = `<div class="table-container" style="max-height: 60vh;"><table class="print-table" style="width: 100%;"><thead><tr><th style="text-align: right; background-color: #f8f9fa; color: #333;">Field</th>`;
             group.forEach((voter, i) => {
                 comparisonHtml += `<th>Voter ${i + 1} (${voter['VOTER #']})</th>`;
             });
             comparisonHtml += '</tr></thead><tbody>';
+
             fieldsToCompare.forEach(field => {
                 const isHighlighted = highlightedFields.includes(field);
                 comparisonHtml += `<tr class="${isHighlighted ? 'highlight-match' : ''}"><td style="font-weight: bold; text-align: right;">${field}</td>`;
@@ -137272,6 +137845,7 @@
                 comparisonHtml += '</tr>';
             });
             comparisonHtml += '</tbody></table></div>';
+            
             document.getElementById('duplicateDetailsContent').innerHTML = comparisonHtml;
             document.querySelector('#duplicateDetailsModal .btn-info').setAttribute('onclick', `printDuplicateGroupDetails(${groupIndex}, this)`);
             document.getElementById('duplicateDetailsModal').style.display = 'flex';
@@ -137289,108 +137863,287 @@
                 updateStatus("This record is not part of a duplicate group in the current filtered view.");
             }
         }
-
+        
         function closeDuplicateDetailsModal() {
             document.getElementById('duplicateDetailsModal').style.display = 'none';
         }
-
-        // --- PRINTING ---
         
+        // --- PRINTING ---
         function generatePrintHTML(data) {
             if (!data || data.length === 0) {
                 updateStatus("No data available to print.");
                 return;
             }
-            
-            const headers = `<thead><tr><th>VOTER #</th><th>FIRST NAME</th><th>LAST NAME</th><th>YOB</th><th>GEN.</th><th>ADDRESS</th><th>CITY</th><th>ST</th><th>PHONE</th><th>VILLAGE</th><th>BK#</th></tr></thead>`;
+            const headers = `<thead><tr><th>VOTER #</th><th>FIRST NAME</th><th>LAST NAME</th><th>YOB</th><th>GEN.</th><th>ADDRESS</th><th>CITY</th><th>ST</th><th>PHONE</th><th>VILLAGE</th><th>BK#</th><th>CENTER</th></tr></thead>`;
             let tableRows = '';
             data.forEach((voter) => {
-                tableRows += `<tr><td>${voter['VOTER #']||''}</td><td>${voter['FIRST NAME']||''}</td><td>${voter['LAST NAME']||''}</td><td>${voter['YOB']||''}</td><td>${voter['GEN.']||''}</td><td>${voter['ADDRESS']||''}</td><td>${voter['CITY']||''}</td><td>${voter['ST']||''}</td><td>${voter['PHONE']||''}</td><td>${voter['VILLAGE']||''}</td><td>${voter['BK#']||''}</td></tr>`;
+                tableRows += `<tr><td>${voter['VOTER #']||''}</td><td>${voter['FIRST NAME']||''}</td><td>${voter['LAST NAME']||''}</td><td>${voter['YOB']||''}</td><td>${voter['GEN.']||''}</td><td>${voter['ADDRESS']||''}</td><td>${voter['CITY']||''}</td><td>${voter['ST']||''}</td><td>${voter['PHONE']||''}</td><td>${voter['VILLAGE']||''}</td><td>${voter['BK#']||''}</td><td>${voter['CENTER']||''}</td></tr>`;
             });
-            
-            // Added style block to suggest landscape orientation
             let html = `
-                <style> @media print { @page { size: landscape; } } </style>
+                <style>
+                    @media print {
+                        @page { size: landscape; }
+                    }
+                </style>
                 <table class="print-table">${headers}<tbody>${tableRows}</tbody></table>`;
             
             const printSection = document.getElementById('printSection');
             printSection.innerHTML = html;
+            printSection.style.display = 'block';
             window.print();
-            setTimeout(() => { printSection.innerHTML = ''; }, 1000); 
+            setTimeout(() => {
+                printSection.innerHTML = '';
+                printSection.style.display = 'none';
+            }, 1000);
         }
 
+        function printMultipleCards() {
+            if (selectedRecords.length === 0) {
+                updateStatus('Please select voters to print cards for.');
+                return;
+            }
+            cardMessage = document.getElementById('cardMessage').value;
+            saveSettings();
+            
+            const votersToPrint = voterData.filter(v => selectedRecords.includes(v.id));
+
+            let html = `
+                <style>
+                    @media print {
+                        @page { size: letter; margin: 0.25in; }
+                        body { margin: 0; padding: 0; background: white !important; }
+                        .card-grid-page { 
+                            display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); 
+                            gap: 10px; width: 100%; height: 10.5in; page-break-after: always;
+                        }
+                        .voter-card { 
+                            border: 2px solid #000 !important; border-radius: 8px; padding: 12px; background: white; 
+                            font-family: Arial, sans-serif; display: flex; flex-direction: column; justify-content: space-between; 
+                            height: 2.4in; break-inside: avoid; page-break-inside: avoid;
+                        }
+                        .voter-card h3 { font-size: 14px; margin-bottom: 4px; color: #2c3e50; font-weight: bold; }
+                        .voter-card p { font-size: 12px; margin: 2px 0; line-height: 1.2; }
+                        .voter-card .voter-number { font-size: 22px !important; font-weight: bold; text-align: center; margin: 8px 0; color: #e74c3c; border-top: 1px dashed #ddd; padding-top: 6px; }
+                        .voter-card .card-message { font-size: 18px !important; font-weight: bold; text-align: center; margin: 6px 0; color: #2c3e50; border-top: 1px dashed #ddd; padding-top: 6px; }
+                    }
+                    .no-print { display: none !important; }
+                </style>
+                <div style="font-family: Arial, sans-serif;">`;
+            
+            for (let i = 0; i < votersToPrint.length; i += 12) {
+                const pageVoters = votersToPrint.slice(i, i + 12);
+                html += `<div class="card-grid-page">`;
+                pageVoters.forEach(voter => {
+                    html += `
+                        <div class="voter-card">
+                            <div>
+                                <h3>${voter['FIRST NAME']} ${voter['LAST NAME']}</h3>
+                                <p><strong>YOB:</strong> ${voter['YOB'] || 'N/A'}</p>
+                                <p><strong>Village:</strong> ${voter['VILLAGE'] || 'N/A'}</p>
+                                <p><strong>Book #:</strong> ${voter['BK#'] || 'N/A'}</p>
+                                <p><strong>Center:</strong> ${voter['CENTER'] || 'Not Assigned'}</p>
+                            </div>
+                            <div class="voter-number">${voter['VOTER #']}</div>
+                            ${cardMessage ? `<div class="card-message">${cardMessage}</div>` : ''}
+                        </div>`;
+                });
+                for (let j = pageVoters.length; j < 12; j++) {
+                    html += `<div class="voter-card" style="border: 1px dashed #ccc !important; background: #f9f9f9;"></div>`;
+                }
+                html += `</div>`;
+                if (i + 12 < votersToPrint.length) {
+                    html += `<div style="page-break-before: always;"></div>`;
+                }
+            }
+
+            html += `</div>`;
+            const printSection = document.getElementById('printSection');
+            printSection.innerHTML = html;
+            printSection.style.display = 'block';
+
+            setTimeout(() => {
+                window.print();
+                setTimeout(() => {
+                    printSection.innerHTML = '';
+                    printSection.style.display = 'none';
+                }, 500);
+            }, 500);
+        }
         function printSelected(button) {
             addFeedback(button);
             if (selectedRecords.length === 0) return updateStatus('Please select records to print.');
             const dataToPrint = voterData.filter(v => selectedRecords.includes(v.id));
             generatePrintHTML(dataToPrint);
         }
-
         function printAllFiltered(button) {
             addFeedback(button);
             if (filteredData.length === 0) return updateStatus('No filtered records to print.');
             generatePrintHTML(filteredData);
         }
-
         function printVoterCard(voter) {
             if (!voter) return;
+            cardMessage = document.getElementById('cardMessage').value;
+            saveSettings();
+            
             const cardHTML = `
                 <style> @media print { @page { size: portrait; } } </style>
-                <div style="border:2px solid #000;padding:20px;margin:20px auto;max-width:400px;font-family:Arial,sans-serif;font-size:14pt;page-break-inside:avoid;"><h2 style="text-align:center;border-bottom:1px solid #ccc;padding-bottom:10px">Voter Card</h2><p><strong>Voter #:</strong> ${voter['VOTER #']}</p><p><strong>Name:</strong> ${voter['FIRST NAME']} ${voter['LAST NAME']}</p><p><strong>YOB:</strong> ${voter['YOB']}</p><p><strong>Village:</strong> ${voter['VILLAGE']}</p><p><strong>Book #:</strong> ${voter['BK#']}</p></div>`;
+                <div style="border:2px solid #000;padding:20px;margin:20px auto;max-width:400px;font-family:Arial,sans-serif;font-size:14pt;page-break-inside:avoid;">
+                    <h2 style="text-align:center;border-bottom:1px solid #ccc;padding-bottom:10px">Voter Card</h2>
+                    <p><strong>Voter #:</strong> ${voter['VOTER #']}</p>
+                    <p><strong>Name:</strong> ${voter['FIRST NAME']} ${voter['LAST NAME']}</p>
+                    <p><strong>YOB:</strong> ${voter['YOB']}</p>
+                    <p><strong>Village:</strong> ${voter['VILLAGE']}</p>
+                    <p><strong>Book #:</strong> ${voter['BK#']}</p>
+                    <p><strong>Center:</strong> ${voter['CENTER'] || 'Not Assigned'}</p>
+                    ${cardMessage ? `<div style="font-size:22px;font-weight:bold;text-align:center;margin:15px 0;color:#e74c3c;border-top:1px dashed #000;padding-top:10px">${cardMessage}</div>` : ''}
+                </div>`;
+            
             const printSection = document.getElementById('printSection');
             printSection.innerHTML = cardHTML;
+            printSection.style.display = 'block';
             window.print();
-            setTimeout(() => { printSection.innerHTML = ''; }, 1000);
+            setTimeout(() => {
+                printSection.innerHTML = '';
+                printSection.style.display = 'none';
+            }, 1000);
         }
-
-        function printDuplicateCategory(categoryId, button) {
-            if (button) addFeedback(button);
-            let groupsToPrint;
-
-            if (categoryId === 'two') {
-                groupsToPrint = duplicateGroups.filter(g => g.length === 2);
-            } else if (categoryId === 'three') {
-                groupsToPrint = duplicateGroups.filter(g => g.length === 3);
-            } else if (categoryId === 'more') {
-                groupsToPrint = duplicateGroups.filter(g => g.length > 3);
-            } else { return; }
-
-            if (groupsToPrint.length === 0) {
-                updateStatus(`No groups to print for category: ${categoryId}`);
-                return;
-            }
-            const votersToPrint = groupsToPrint.flat();
-            generatePrintHTML(votersToPrint);
-        }
-        
         function printDuplicateGroupDetails(groupIndex, button){
-            if (button) addFeedback(button);
-            if (groupIndex < 0) {
-                updateStatus("Cannot print. Please open a group's details to print.");
-                return;
-            }
-            
-            const contentToPrint = document.getElementById('duplicateDetailsContent').innerHTML;
-            if (!contentToPrint) return;
-            
-            const printHTML = `
-                <style> 
-                    @media print { 
-                        @page { size: landscape; } 
-                        .print-comparison-table .print-table { font-size: 10pt !important; } /* smaller font for comparison */
-                    } 
-                </style>
+             if (button) addFeedback(button);
+             if (groupIndex < 0) return;
+             const contentToPrint = document.getElementById('duplicateDetailsContent').innerHTML;
+             if (!contentToPrint) return;
+
+             const printHTML = `
+                <style> @media print { @page { size: landscape; } .print-comparison-table .print-table { font-size: 10pt !important; } } </style>
                 <div class="print-comparison-table">${contentToPrint}</div>
             `;
-
             const printSection = document.getElementById('printSection');
-            printSection.innerHTML = printHTML; 
+            printSection.innerHTML = printHTML;
+            printSection.style.display = 'block';
             window.print();
-            setTimeout(() => { printSection.innerHTML = ''; }, 1000);
+            setTimeout(() => {
+                printSection.innerHTML = '';
+                printSection.style.display = 'none';
+            }, 1000);
+        }
+        
+        // --- PNG & ZIP EXPORT ---
+        async function exportVoterCardsAsZip(type) {
+            let votersToExport;
+            if (type === 'selected') {
+                if (selectedRecords.length === 0) {
+                    updateStatus('Please select voters to export.'); return;
+                }
+                votersToExport = voterData.filter(v => selectedRecords.includes(v.id));
+            } else {
+                if (filteredData.length === 0) {
+                    updateStatus('No filtered voters to export.'); return;
+                }
+                votersToExport = filteredData;
+            }
+
+            updateStatus(`Generating ${votersToExport.length} voter cards for ZIP export... Please wait.`);
+            const zip = new JSZip();
+            cardMessage = document.getElementById('cardMessage').value;
+            saveSettings();
+
+            for (const voter of votersToExport) {
+                const cardHTML = `
+                    <div style="border: 3px solid #000; border-radius: 12px; padding: 20px; background: white; font-family: Arial, sans-serif; width: 400px; height: 300px; display: flex; flex-direction: column; justify-content: space-between; margin: 20px;">
+                        <div>
+                            <h3 style="font-size: 20px; margin-bottom: 8px; color: #2c3e50; font-weight: bold;">${voter['FIRST NAME']} ${voter['LAST NAME']}</h3>
+                            <p style="font-size: 14px; margin: 4px 0;"><strong>YOB:</strong> ${voter['YOB'] || 'N/A'}</p>
+                            <p style="font-size: 14px; margin: 4px 0;"><strong>Village:</strong> ${voter['VILLAGE'] || 'N/A'}</p>
+                            <p style="font-size: 14px; margin: 4px 0;"><strong>Book #:</strong> ${voter['BK#'] || 'N/A'}</p>
+                            <p style="font-size: 14px; margin: 4px 0;"><strong>Center:</strong> ${voter['CENTER'] || 'Not Assigned'}</p>
+                        </div>
+                        <div style="font-size: 24px; font-weight: bold; text-align: center; margin: 15px 0; color: #e74c3c; border-top: 2px dashed #ddd; padding-top: 12px;">${voter['VOTER #']}</div>
+                        ${cardMessage ? `<div style="font-size: 18px; font-weight: bold; text-align: center; margin: 12px 0; color: #2c3e50; border-top: 2px dashed #ddd; padding-top: 10px;">${cardMessage}</div>` : ''}
+                    </div>`;
+
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = cardHTML;
+                tempDiv.style.position = 'absolute'; tempDiv.style.left = '-9999px'; tempDiv.style.top = '0';
+                document.body.appendChild(tempDiv);
+
+                const canvas = await html2canvas(tempDiv.firstElementChild, { scale: 2 });
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                const fileName = `voter-card-${voter['VOTER #'] || voter.id}.png`;
+                zip.file(fileName, blob);
+                
+                document.body.removeChild(tempDiv);
+            }
+
+            updateStatus('Creating ZIP file... Please wait.');
+            zip.generateAsync({ type: "blob" }).then(content => {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(content);
+                link.download = "voter_cards.zip";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showSuccessMessage(`${votersToExport.length} voter cards have been exported as a .zip file.`);
+            });
+        }
+        
+        function exportSingleVoterCardAsPNG(voter) {
+            let voterToExport = voter;
+            if (!voterToExport) {
+                if (selectedRecords.length !== 1) {
+                    updateStatus('Please select exactly one voter to export as PNG.'); return;
+                }
+                voterToExport = voterData.find(v => v.id === selectedRecords[0]);
+            }
+            if (!voterToExport) return;
+
+            cardMessage = document.getElementById('cardMessage').value;
+            saveSettings();
+
+            const cardHTML = `
+                <div class="voter-card-single" style="border: 3px solid #000; border-radius: 12px; padding: 20px; background: white; font-family: Arial, sans-serif; width: 400px; height: 300px; display: flex; flex-direction: column; justify-content: space-between; margin: 20px;">
+                    <div>
+                        <h3 style="font-size: 20px; margin-bottom: 8px; color: #2c3e50; font-weight: bold;">${voterToExport['FIRST NAME']} ${voterToExport['LAST NAME']}</h3>
+                        <p style="font-size: 14px; margin: 4px 0;"><strong>YOB:</strong> ${voterToExport['YOB'] || 'N/A'}</p>
+                        <p style="font-size: 14px; margin: 4px 0;"><strong>Village:</strong> ${voterToExport['VILLAGE'] || 'N/A'}</p>
+                        <p style="font-size: 14px; margin: 4px 0;"><strong>Book #:</strong> ${voterToExport['BK#'] || 'N/A'}</p>
+                        <p style="font-size: 14px; margin: 4px 0;"><strong>Center:</strong> ${voterToExport['CENTER'] || 'Not Assigned'}</p>
+                    </div>
+                    <div style="font-size: 24px; font-weight: bold; text-align: center; margin: 15px 0; color: #e74c3c; border-top: 2px dashed #ddd; padding-top: 12px;">${voterToExport['VOTER #']}</div>
+                    ${cardMessage ? `<div style="font-size: 18px; font-weight: bold; text-align: center; margin: 12px 0; color: #2c3e50; border-top: 2px dashed #ddd; padding-top: 10px;">${cardMessage}</div>` : ''}
+                </div>`;
+            
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = cardHTML;
+            tempDiv.style.position = 'absolute'; tempDiv.style.left = '-9999px'; tempDiv.style.top = '0';
+            document.body.appendChild(tempDiv);
+            
+            html2canvas(tempDiv.firstElementChild, { scale: 3, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `voter-card-${voterToExport['VOTER #'] || voterToExport.id}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                document.body.removeChild(tempDiv);
+                showSuccessMessage(`Voter card exported as PNG: ${link.download}`);
+            }).catch(error => {
+                console.error('Error exporting PNG:', error);
+                document.body.removeChild(tempDiv);
+            });
         }
 
-        // --- ADD/EDIT VOTER ---
-
+        // --- CRUD OPERATIONS ---
+        function deleteSelectedVoters() {
+            if (selectedRecords.length === 0) {
+                updateStatus('Please select voters to delete.'); return;
+            }
+            if (confirm(`Are you sure you want to delete ${selectedRecords.length} selected voter(s)? This action cannot be undone.`)) {
+                voterData = voterData.filter(v => !selectedRecords.includes(v.id));
+                const deletedCount = selectedRecords.length;
+                selectedRecords = [];
+                saveVoterData();
+                applyFilters();
+                showSuccessMessage(`Deleted ${deletedCount} voter(s) successfully.`);
+            }
+        }
         function openAddVoterModal(button) {
             addFeedback(button);
             document.getElementById('modalTitle').textContent = 'Add New Voter';
@@ -137398,43 +138151,37 @@
             document.getElementById('voterForm').reset();
             document.getElementById('voterModal').style.display = 'flex';
         }
-
         function editVoter(id) {
             const voter = voterData.find(v => v.id === id);
             if (!voter) return;
+
             document.getElementById('modalTitle').textContent = `Edit Voter: ${voter['FIRST NAME']} ${voter['LAST NAME']}`;
             document.getElementById('editVoterId').value = id;
             Object.keys(voter).forEach(key => {
-                const map = {'VOTER #':'voterNumber','FIRST NAME':'firstName','LAST NAME':'lastName','YOB':'yob','GEN.':'gender','PHONE':'phone','ADDRESS':'address','CITY':'city','ST':'state','ZIP':'zip','UNION':'union','VILLAGE':'village','BK#':'bookNumber'};
+                const map = {
+                    'VOTER #':'voterNumber', 'FIRST NAME':'firstName', 'LAST NAME':'lastName', 'YOB':'yob', 'GEN.':'gender', 'PHONE':'phone',
+                    'ADDRESS':'address', 'CITY':'city', 'ST':'state', 'ZIP':'zip', 'UNION':'union', 'VILLAGE':'village', 'BK#':'bookNumber', 'CENTER': 'center'
+                };
                 const element = document.getElementById(map[key]);
                 if (element) element.value = voter[key];
             });
+
             document.getElementById('voterModal').style.display = 'flex';
         }
-
         function closeVoterModal() {
             document.getElementById('voterModal').style.display = 'none';
         }
-
         function saveVoter(event) {
             event.preventDefault();
             const id = document.getElementById('editVoterId').value;
             const voter = {
-                'VOTER #': document.getElementById('voterNumber').value,
-                'FIRST NAME': document.getElementById('firstName').value,
-                'LAST NAME': document.getElementById('lastName').value,
-                'YOB': document.getElementById('yob').value,
-                'GEN.': document.getElementById('gender').value,
-                'PHONE': document.getElementById('phone').value,
-                'ADDRESS': document.getElementById('address').value,
-                'CITY': document.getElementById('city').value,
-                'ST': document.getElementById('state').value,
-                'ZIP': document.getElementById('zip').value,
-                'UNION': document.getElementById('union').value,
-                'VILLAGE': document.getElementById('village').value,
-                'BK#': document.getElementById('bookNumber').value
+                'VOTER #': document.getElementById('voterNumber').value, 'FIRST NAME': document.getElementById('firstName').value, 'LAST NAME': document.getElementById('lastName').value,
+                'YOB': document.getElementById('yob').value, 'GEN.': document.getElementById('gender').value, 'PHONE': document.getElementById('phone').value,
+                'ADDRESS': document.getElementById('address').value, 'CITY': document.getElementById('city').value, 'ST': document.getElementById('state').value,
+                'ZIP': document.getElementById('zip').value, 'UNION': document.getElementById('union').value, 'VILLAGE': document.getElementById('village').value,
+                'BK#': document.getElementById('bookNumber').value, 'CENTER': document.getElementById('center').value
             };
-            
+
             if (id === '') {
                 voter.id = voterData.length > 0 ? Math.max(...voterData.map(v => v.id)) + 1 : 1;
                 voterData.push(voter);
@@ -137447,23 +138194,19 @@
                 }
             }
             
+            saveVoterData();
             populateDataLists();
             applyFilters();
             closeVoterModal();
         }
 
-        // --- OTHER ANALYSIS FUNCTIONS --- (Unchanged)
-        function checkMissingBooks(button) { addFeedback(button); /* Logic */ updateStatus("Missing book check complete."); }
-        function analyzeBookGaps(button) { addFeedback(button); /* Logic */ updateStatus("Book gap analysis complete."); }
-        function printMissingBooks(button) { addFeedback(button); /* Logic */ }
-        function printBookAnalysis(button) { addFeedback(button); /* Logic */ }
+        // --- OTHER FUNCTIONS ---
         function updateStatistics() {
             document.getElementById('totalRecords').textContent = voterData.length;
             document.getElementById('filteredRecords').textContent = filteredData.length;
             document.getElementById('selectedRecords').textContent = selectedRecords.length;
+            document.getElementById('duplicateCount').textContent = duplicateGroups.length;
         }
     </script>
 </body>
 </html>
-
-
